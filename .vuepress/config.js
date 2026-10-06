@@ -129,7 +129,6 @@ module.exports = {
                         '/project/introduction.md',
                         '/project/about.md',
                         '/project/terms.md',
-                        '/project/community.md',
                     ]
                 },
                 {
