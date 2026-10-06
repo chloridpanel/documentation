@@ -1,16 +1,16 @@
 # Terminology
-**Panel** — This refers to Pterodactyl Panel itself, and is what allows you to add additional
+**Panel** — This refers to Chloridpanel Panel itself, and is what allows you to control and add additional
 nodes and servers to the system.
 
-**Node** — A node is a physical machine that runs an instance of Wings.
+**Node** — A node is a physical machine that runs an instance of Pterodactyl Wings/~~Chlorid Acid~~.
 
-**Wings** — The newer service written in Go that interfaces with Docker and the Panel to provide secure access for
+**Wings/~~Chlorid Acid~~** — The newer service written in Go that interfaces with Docker and the Panel to provide secure access for
 controlling servers via the Panel.
 
 **Server** — In this case, a server refers to a running instance that is created by the panel. These servers are
 created on nodes, and you can have multiple servers per node.
 
-**Docker** — Docker is a platform that lets you separate the application from your infrastructure into isolated, secure containers.
+**Docker** — Docker is a containerization platform.
 
 **Docker Image**  — A Docker image contains everything needed to run a containerized application. (e.g. Java for a Minecraft Server).
 
@@ -24,12 +24,6 @@ created on nodes, and you can have multiple servers per node.
 **Yolks**  — A curated collection of core docker images that can be used with Pterodactyl's Egg system.
 
 
-## Simple Setup Diagram
-![](./../.vuepress/public/simple_setup_diagram.png)
-
-
-## Advanced Setup Diagram
 ::: tip Panel and Wings on the same machine
 It is also possible to install wings on the panel machine so it acts as panel and node machine at once.
 :::
-![](./../.vuepress/public/example_setup.png)

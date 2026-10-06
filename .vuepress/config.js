@@ -1,7 +1,7 @@
 module.exports = {
     base: '/',
-    title: 'Pterodactyl',
-    description: 'Pterodactyl is an open-source game server management panel built with PHP, React, and Go. Designed with security in mind, Pterodactyl runs all game servers in isolated Docker containers while exposing a beautiful and intuitive UI to end users.',
+    title: 'Chloridpanel',
+    description: 'Chloridpanel is an open-source game server management panel built with PHP, React, and Go with design and security in mind.',
     plugins: [
         ['@vuepress/search', {
             searchMaxSuggestions: 10
@@ -24,28 +24,28 @@ module.exports = {
             },
         },
     },
-    head: [
-        ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png' }],
+    head: [/*
+        ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png' }],*/
         ['link', { rel: 'icon', type: 'image/png', href: '/favicons/favicon-32x32.png', sizes: '32x32' }],
-        ['link', { rel: 'icon', type: 'image/png', href: '/favicons/favicon-16x16.png', sizes: '16x16' }],
+        ['link', { rel: 'icon', type: 'image/png', href: '/favicons/favicon-16x16.png', sizes: '16x16' }],/*
         ['link', { rel: 'mask-icon', href: '/favicons/safari-pinned-tab.svg', color: '#0e4688' }],
         ['link', { rel: 'manifest', href: '/favicons/site.webmanifest' }],
         ['link', { rel: 'shortcut icon', href: '/favicons/favicon.ico' }],
         ['meta', { name: 'msapplication-config', content: '/favicons/browserconfig.xml' }],
-        ['meta', { name: 'theme-color', content: '#0e4688' }],
+        ['meta', { name: 'theme-color', content: '#0e4688' }],*/
     ],
     themeConfig: {
-        repo: 'pterodactyl/panel',
-        docsRepo: 'pterodactyl/documentation',
+        repo: 'chloridpanel/panel',
+        docsRepo: 'chloridpanel/documentation',
         repoLabel: 'GitHub',
         editLinkText: 'Help us improve this page.',
         editLinks: true,
-        logo: '/logos/pterry.svg',
+
+        logo: '/logos/box.svg',
+        banner: '/logos/banner_logo.png',
+        mockup1: '/mockup/mockup_orange_mcbk.png',
+
         nav: [
-            {
-                text: 'Eggs',
-                link: 'https://eggs.pterodactyl.io/',
-            },
             {
                 text: 'Documentation',
                 link: '/project/introduction.md',
@@ -56,7 +56,7 @@ module.exports = {
             },
             {
                 text: 'Get Help',
-                link: 'https://discord.gg/pterodactyl'
+                link: 'https://discord.gg/GMC4WzFTuS'
             },
             {
                 text: 'API',
@@ -139,7 +139,7 @@ module.exports = {
                     currentVersion: '1.0',
                     versions: [
                         {
-                            title: '1.12',
+                            title: '1.0',
                             name: '1.0',
                             status: 'stable',
                             children: [
@@ -152,7 +152,7 @@ module.exports = {
                             ]
                         }
                     ]
-                },
+                }, /*
                 {
                     title: 'Wings',
                     collapsable: false,
@@ -171,7 +171,7 @@ module.exports = {
                             ]
                         }
                     ]
-                },
+                }, */
                 {
                     title: 'Tutorials',
                     collapsable: false,

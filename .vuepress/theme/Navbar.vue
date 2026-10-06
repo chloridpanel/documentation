@@ -6,7 +6,7 @@
     />
     <div class="logo-container">
       <router-link :to="$localePath" class="home-link">
-        <img class="logo" v-if="$site.themeConfig.logo" :src="$withBase($site.themeConfig.logo)" />
+        <!-- <img class="logo" v-if="$site.themeConfig.logo" :src="$withBase($site.themeConfig.logo)" />  some werid issue here-->
         <span
           class="site-name hidden md:inline"
           v-if="$siteTitle"

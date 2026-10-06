@@ -2,7 +2,7 @@
 
 [[toc]]
 
-Pterodactyl Panel is designed to run on your own web server. You will need to have root access to your server in order to run and use this panel.
+Chloridpanel is designed to run on your own web server(Not Strato/Hostinger/your alternative web hosts, you need either a VPS or a Dedicated machine). You will need to have root access to your server in order to run and use this panel.
 
 You are expected to understand how to read documentation to use this Panel. We have spent many hours detailing how to install or upgrade our
 software; take some time and read rather than copy and pasting and then complaining when things do not work. This panel does
@@ -10,23 +10,20 @@ not exist as a drag-and-drop service to run your servers. It is a highly complex
 administrators willing to spend some time learning how to use it. **If you expect to be able to install this with no understanding
 of basic linux system administration you should stop and turn around now.**
 
-::: tip Looking for something simple to setup?
-[WISP](https://wisp.gg) is a Pterodactyl powered SaaS suitable for enterprise and personal use. Offering all the features without the setup hassle, and fully compatible with Pterodactyl eggs. Comparable to MultiCraft or TCAdmin while offering new and unique features. Click here to [learn more](https://wisp.gg/features).
-:::
-
 ## Picking a Server OS
 
-Pterodactyl runs on a wide range of operating systems, so pick whichever you are most comfortable using.
+Chloridpanel runs on a wide range of operating systems, so pick whichever you are most comfortable using.
 
 ::: warning
-Pterodactyl does not support most OpenVZ systems due to incompatibilities with Docker. If you are planning on running
-this software on an OpenVZ based system you will &mdash; most likely &mdash; not be successful.
+Chloridpanel does not support most OpenVZ systems due to incompatibilities with Docker. If you are planning on running
+this software on an OpenVZ based system you will &mdash; most likely &mdash; not be successful, you will not recieve any support from us.
 :::
 
 | Operating System                   | Version |     Supported      | Notes                                                       |
 | ---------------------------------- | ------- | :----------------: | ----------------------------------------------------------- |
 | **Ubuntu**                         | 22.04   | :white_check_mark: | Requires additional repositories for PHP                    |
 |                                    | 24.04   | :white_check_mark: | MariaDB can be installed without the repo setup script.     |
+|                                    | 26.04   | :white_check_mark: |                                                             |
 | **RHEL / Rocky Linux / AlmaLinux** | 8       | :white_check_mark: | Extra repos are required.                                   |
 |                                    | 9       | :white_check_mark: |                                                             |
 | **Debian**                         | 11      | :white_check_mark: | [Debian Dependencies](/community/installation-guides/panel/debian.md)                                                            |
@@ -35,8 +32,8 @@ this software on an OpenVZ based system you will &mdash; most likely &mdash; not
 
 ## Dependencies
 
-* PHP `8.2` or `8.3` (recommended) with the following extensions: `cli`, `openssl`, `gd`, `mysql`, `PDO`, `mbstring`, `tokenizer`, `bcmath`, `xml` or `dom`, `curl`, `zip`, and `fpm` if you are planning to use NGINX.
-* MySQL `5.7.22` and higher (MySQL `8` recommended) **or** MariaDB `10.2` and higher.
+* PHP `8.2-8.4` or `8.5` (recommended) with the following extensions: `cli`, `openssl`, `gd`, `mysql`, `PDO`, `mbstring`, `tokenizer`, `bcmath`, `xml` or `dom`, `curl`, `zip`, and `fpm` if you are planning to use NGINX.
+* MySQL `5.7.22` and higher (MySQL `8` recommended) **or** MariaDB `10.2` and higher(recommended over MySQL).
 * Redis (`redis-server`)
 * A webserver (Apache, NGINX, Caddy, etc.)
 * `curl`
@@ -50,7 +47,27 @@ this software on an OpenVZ based system you will &mdash; most likely &mdash; not
 The commands below are simply an example of how you might install these dependencies. Please consult with your
 operating system's package manager to determine the correct packages to install.
 
-``` bash
+::::: tabs
+
+
+:::: tab "I run a newer version of Debian/Ubuntu"
+You can run this:
+```bash
+# Add Redis official APT repository
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+
+# Update repositories list
+apt update
+
+# Install Dependencies
+apt -y install php8.5 php8.5-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} mariadb-server nginx tar unzip git redis-server
+```
+::::
+
+:::: tab "I run Ubuntu 22.04"
+Only run this if you're on Ubuntu 22.04:
+```bash
 # Add "add-apt-repository" command
 apt -y install software-properties-common curl apt-transport-https ca-certificates gnupg
 
@@ -65,8 +82,10 @@ echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://pack
 apt update
 
 # Install Dependencies
-apt -y install php8.3 php8.3-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} mariadb-server nginx tar unzip git redis-server
+apt -y install php8.5 php8.5-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} mariadb-server nginx tar unzip git redis-server
 ```
+::::
+:::::
 
 ### Installing Composer
 
@@ -83,8 +102,8 @@ The first step in this process is to create the folder where the panel will live
 newly created folder. Below is an example of how to perform this operation.
 
 ``` bash
-mkdir -p /var/www/pterodactyl
-cd /var/www/pterodactyl
+mkdir -p /var/www/chloridpanel
+cd /var/www/chloridpanel
 ```
 
 Once you have created a new directory for the Panel and moved into it you'll need to download the Panel files. This
@@ -93,22 +112,22 @@ and then set the correct permissions on the `storage/` and `bootstrap/cache/` di
 allow us to store files as well as keep a speedy cache available to reduce load times.
 
 ``` bash
-curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz
+curl -Lo panel.tar.gz https://github.com/chloridpanel/panel/releases/latest/download/panel.tar.gz
 tar -xzvf panel.tar.gz
 chmod -R 755 storage/* bootstrap/cache/
 ```
 
 ## Installation
 
-Now that all of the files have been downloaded we need to configure some core aspects of the Panel.
+Now that all the files have been downloaded we need to configure some core aspects of the Panel.
 
 ::: tip Database Configuration
 You will need a database setup and a user with the correct permissions created for that database before
-continuing any further. See below to create a user and database for your Pterodactyl panel quickly. To find more detailed information
+continuing any further. See below to create a user and database for your Chloridpanel panel quickly. To find more detailed information
 please have a look at [Setting up MySQL](/tutorials/mysql_setup.html).
 
 ```sql
-# If using MariaDB (v11.0.0+) (This is the default when installing Pterodactyl by following the documentation.)
+# If using MariaDB (v11.0.0+) (This is the default when installing Chloridpanel by following the documentation.)
 mariadb -u root -p
 
 # If using MySQL
@@ -117,9 +136,9 @@ mysql -u root -p
 ```sql
 
 # Remember to change 'yourPassword' below to be a unique password
-CREATE USER 'pterodactyl'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
+CREATE USER 'chloridpanel'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
 CREATE DATABASE panel;
-GRANT ALL PRIVILEGES ON panel.* TO 'pterodactyl'@'127.0.0.1' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON panel.* TO 'chloridpanel'@'127.0.0.1' WITH GRANT OPTION;
 exit
 ```
 
@@ -133,7 +152,7 @@ cp .env.example .env
 COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
 
 # Only run the command below if you are installing this Panel for
-# the first time and do not have any Pterodactyl Panel data in the database.
+# the first time and do not have any Chloridpanel data in the database, otherwise, you'd not get your data back if you didn't backup your key.
 php artisan key:generate --force
 ```
 
@@ -144,7 +163,7 @@ Store it somewhere safe - not just on your server. If you lose it, all encrypted
 To grab your `APP_KEY`, open a terminal and run the following in your panel directory:
 
 ```bash
-grep APP_KEY /var/www/pterodactyl/.env
+grep APP_KEY /var/www/chloridpanel/.env
 ```
 
 You should see something like:
@@ -164,7 +183,7 @@ Do not keep it only on the server. If you lose this key, your encrypted data is 
 
 ### Environment Configuration
 
-Pterodactyl's core environment is easily configured using a few different CLI commands built into the app. This step
+Chloridpanel's core environment is easily configured using a few different CLI commands built into the app. This step
 will cover setting up things such as sessions, caching, database credentials, and email sending.
 
 ``` bash
@@ -178,9 +197,9 @@ php artisan p:environment:mail
 
 ### Database Setup
 
-Now we need to setup all of the base data for the Panel in the database you created earlier. **The command below
+Now we need to setup all the base data for the Panel in the database you created earlier. **The command below
 may take some time to run depending on your machine. Please _DO NOT_ exit the process until it is completed!** This
-command will setup the database tables and then add all of the Nests & Eggs that power Pterodactyl.
+command will setup the database tables and then add all the Nests & Eggs that power Chloridpanel.
 
 ``` bash
 php artisan migrate --seed --force
@@ -202,13 +221,13 @@ use them correctly.
 
 ``` bash
 # If using NGINX, Apache or Caddy (not on RHEL / Rocky Linux / AlmaLinux)
-chown -R www-data:www-data /var/www/pterodactyl/*
+chown -R www-data:www-data /var/www/chloridpanel/*
 
 # If using NGINX on RHEL / Rocky Linux / AlmaLinux
-chown -R nginx:nginx /var/www/pterodactyl/*
+chown -R nginx:nginx /var/www/chloridpanel/*
 
 # If using Apache on RHEL / Rocky Linux / AlmaLinux
-chown -R apache:apache /var/www/pterodactyl/*
+chown -R apache:apache /var/www/chloridpanel/*
 ```
 
 ## Queue Listeners
@@ -218,27 +237,27 @@ You will need to setup the queue worker for these actions to be processed.
 
 ### Crontab Configuration
 
-The first thing we need to do is create a new cronjob that runs every minute to process specific Pterodactyl tasks, such
+The first thing we need to do is create a new cronjob that runs every minute to process specific Chloridpanel tasks, such
 as session cleanup and sending scheduled tasks to daemons. You'll want to open your crontab using `sudo crontab -e` and
 then paste the line below.
 
 ```bash
-* * * * * php /var/www/pterodactyl/artisan schedule:run >> /dev/null 2>&1
+* * * * * php /var/www/chloridpanel/artisan schedule:run >> /dev/null 2>&1
 ```
 
 ### Create Queue Worker
 
 Next you need to create a new systemd worker to keep our queue process running in the background. This queue is responsible
-for sending emails and handling many other background tasks for Pterodactyl.
+for sending emails and handling many other background tasks for Chloridpanel.
 
-Create a file called `pteroq.service` in `/etc/systemd/system` with the contents below.
+Create a file called `chlorid.service` in `/etc/systemd/system` with the contents below.
 
 ``` text
-# Pterodactyl Queue Worker File
+# Chloridpanel Queue Worker File
 # ----------------------------------
 
 [Unit]
-Description=Pterodactyl Queue Worker
+Description=Chloridpanel Queue Worker
 After=redis-server.service
 
 [Service]
@@ -247,7 +266,7 @@ After=redis-server.service
 User=www-data
 Group=www-data
 Restart=always
-ExecStart=/usr/bin/php /var/www/pterodactyl/artisan queue:work --queue=high,standard,low --sleep=3 --tries=3
+ExecStart=/usr/bin/php /var/www/chloridpanel/artisan queue:work --queue=high,standard,low --sleep=3 --tries=3
 StartLimitInterval=180
 StartLimitBurst=30
 RestartSec=5s
@@ -274,13 +293,7 @@ sudo systemctl enable --now redis-server
 Finally, enable the service and set it to boot on machine start.
 
 ``` bash
-sudo systemctl enable --now pteroq.service
+sudo systemctl enable --now chlorid.service
 ```
-
-### Telemetry
-
-Since 1.11, Pterodactyl will collect anonymous telemetry to help us better understand how the
-software is being used. To learn more about this feature and to opt-out, please see our [Telemetry](./additional_configuration.md#telemetry)
-documentation. Make sure to continue with the rest of the installation process.
 
 #### Next Step: [Webserver Configuration](./webserver_configuration)

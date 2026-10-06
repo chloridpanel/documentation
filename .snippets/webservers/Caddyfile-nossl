@@ -8,12 +8,12 @@
 
 # Replace the example <domain> with your domain name or IP address
 <domain>:80 {
-    root * /var/www/pterodactyl/public
+    root * /var/www/chloridpanel/public
 
     file_server
 
     php_fastcgi unix//run/php/php8.3-fpm.sock {
-        root /var/www/pterodactyl/public
+        root /var/www/chloridpanel/public
         index index.php
 
         env PHP_VALUE "upload_max_filesize = 100M
@@ -41,7 +41,7 @@
     respond /.ht* 403
 
     log {
-        output file /var/log/caddy/pterodactyl.log {
+        output file /var/log/caddy/chloridpanel.log {
             roll_size 100MiB
             roll_keep_for 7d
         }

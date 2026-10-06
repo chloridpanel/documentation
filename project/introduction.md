@@ -1,5 +1,5 @@
 # Introduction
-Pterodactyl is the open-source game server management panel built with PHP, React, and Go. Designed with
+Chloridpanel is the open-source game server management panel based on Pterodactyl V1 built with PHP, React, and Go. Designed with
 security in mind, Pterodactyl runs all game servers in isolated Docker containers while exposing a beautiful
 and intuitive UI to administrators and users. What more are you waiting for? Make game servers a first-class
 citizen on your platform today.
@@ -8,9 +8,9 @@ citizen on your platform today.
 We support a huge variety of games by utilizing Docker containers to isolate each instance, giving you the power
 to host your games across the world without having to bloat each physical machine with additional dependencies.
 
-Some of our core supported games include:
+Some of our core supported games include but not limited to:
 
-* Minecraft — including Spigot, Sponge, Bungeecord, Waterfall, and more
+* Minecraft(including PaperMC, Fabric, Forge, Velocity, and more)
 * Rust
 * Terraria
 * Teamspeak
@@ -30,10 +30,9 @@ and there are plenty more games available provided by the community. Some of the
 * FiveM
 * Xonotic
 * Discord ATLBot
-* [and many more...](https://pterodactyleggs.com)
 
 ## Responsible Disclosure
-Pterodactyl is completely open-source, and as such completely open to independent users and auditors to browse our
+Chloridpanel is completely open-source, and as such completely open to independent users and auditors to browse our
 code base and hunt for security issues. If you come across anything that raises red flags for you, please do not 
-hesitate to reach out directly to `support@pterodactyl.io`. We ask that you please be responsible when disclosing
-any security concerns and _do not_ report them on our public facing bug tracker.
+hesitate to reach out directly to `optimay` on Discord. We ask that you please be responsible when disclosing
+any security concerns and _do not_ report them on our public facing bug tracker, this might reveal this security issue to everyone

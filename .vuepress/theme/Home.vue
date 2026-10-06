@@ -4,27 +4,27 @@
             <div class="container z-10">
                 <div class="text-center">
                     <div>
-                        <img class="max-w-xl w-full inline-block" src="https://cdn.pterodactyl.io/logos/new/pterodactyl_logo_transparent.png" alt="Pterodactyl">
-                    </div>
+                      <img
+                          class="max-w-xl w-full inline-block"
+                          :src="$withBase($site.themeConfig.banner)"
+                          alt="Chloridpanel; Pterodactyl without shit"
+                      />                    </div>
                     <div class="mt-4">
                         <!-- <a class="btn hidden md:inline-block" href="https://demo.pterodactyl.io" target="_blank" rel="nofollow noopener">Demo</a> -->
-                        <router-link class="btn inline-block" to="/panel/getting_started.html">Let's Get Started!</router-link>
+                        <router-link class="btn inline-block" to="/panel/getting_started.html">Let's Install!</router-link>
                     </div>
                 </div>
             </div>
         </div>
         <div class="section bg-white">
             <div class="container text-center">
-                <h1 class="text-blue mb-4">Pterodactyl Panel</h1>
+                <h1 class="text-blue mb-4">Chloridpanel</h1>
                 <h3 class="border-0 font-normal leading-normal mx-auto" style="max-width: 50rem">
-                    Pterodactyl&reg; is a free, open-source game server management panel built with PHP, React, and Go.
-                    Designed with security in mind, Pterodactyl runs all game servers in isolated Docker containers
+                    Chloridpanel is a free, open-source game server management panel built with PHP, React, and Go on the base of Pterodactyl V1.
+                    Designed with security and functionality in mind, Pterodactyl runs all game servers in isolated Docker containers
                     while exposing a beautiful and intuitive UI to end users.
                 </h3>
-                <h3 class="border-0 leading-normal mx-auto mt-4" style="max-width: 50rem">
-                    Stop settling for less. Make game servers a first class citizen on your platform.
-                </h3>
-                <img class="max-w-lg w-full m-4 inline-block" src="https://cdn.pterodactyl.io/site-assets/mockup-macbook-grey-1.0.png">
+                <img class="max-w-lg w-full m-4 inline-block" :src="$withBase($site.themeConfig.mockup1)">
             </div>
         </div>
         <div class="section bg-blue text-grey-lightest">
@@ -64,6 +64,7 @@
                 </div>
             </div>
         </div>
+      <!-- later lmao
         <div class="section bg-white">
             <div class="text-center">
                 <h1>Screenshots</h1>
@@ -105,48 +106,51 @@
                     </slick>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+      <!--
         <div class="section bg-blue text-grey-lightest">
             <div class="container text-center">
-                <h1>Get Started</h1>
+                <h1 >Get Started</h1>
                 <p class="m-4">Ready to fly on the Pterodactyl?</p>
                 <div class="mt-4">
-                    <router-link class="btn inline-block" to="/project/introduction.html">About the project</router-link>
+                    <router-link class="btn inline-block " to="/project/introduction.html">About the project</router-link>
                     <a class="btn inline-block" href="https://discord.gg/pterodactyl">Discord</a>
                 </div>
             </div>
         </div>
+      -->
         <div class="section bg-black text-grey-lighter text-sm less-padding">
             <div class="container text-center">
                 <div>
-                    <img class="h-20" :src="$withBase('logos/banner_logo.png')" alt="pterodactyl banner logo">
+                    <img class="h-20" :src="$withBase('logos/banner_logo.png')" alt="chloridpanel banner logo">
                 </div>
                 <div class="text-left md:flex">
                     <div class="flex-none w-full md:w-1/2 md:pr-12">
                         <p class="my-4">
-                            Since 2015 Pterodactyl&reg; has been delivering robust, performant, and secure software that allows
+                            Since 2026, Chloridpanel has been delivering robust, performant, and secure software that allows
                             individuals, networks, and hosting companies to run game servers at scale; easily. Best of all?
-                            No exorbitant monthly costs.
+                            No exorbitant monthly costs or hidden code.
                         </p>
                         <p class="my-4">
-                            Take the plunge today and discover why thousands of users trust Pterodactyl&reg; to manage their
-                            game servers.
+                            Take a look around and see why people use Chloridpanel :P
                         </p>
                     </div>
                     <div class="hidden md:block md:flex-1 md:pr-12">
-                        <p><a class="text-grey-lightest" href="https://github.com/pterodactyl">GitHub</a></p>
+                        <p><a class="text-grey-lightest" href="https://github.com/chloridpanel">GitHub</a></p>
+                      <!--
                         <p><a class="text-grey-lightest" href="https://github.com/sponsors/pterodactyl">Sponsor</a></p>
-                        <p><a class="text-grey-lightest" href="https://github.com/sponsors/pterodactyl">Donate</a></p>
+                        <p><a class="text-grey-lightest" href="https://github.com/sponsors/pterodactyl">Donate</a></p> | not legal for me to do this shit -->
                         <p><a class="text-grey-lightest" href="/panel/troubleshooting.html">Troubleshooting</a></p>
                         <p><a class="text-grey-lightest" href="https://pterodactyleggs.com">Additional Game Configurations</a></p>
                     </div>
                     <div class="text-center mt-8 md:flex-1 md:mt-0">
-                        <a href="https://discord.gg/pterodactyl" target="_blank" rel="nofollow noopener">
-                            <img src="https://cdn.pterodactyl.io/site-assets/discord.png" class="w-3/4">
+                        <a target="_blank" rel="nofollow noopener">
+                          <iframe src="https://ptb.discord.com/widget?id=1557032326351949924&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
                         </a>
                     </div>
                 </div>
-                <div class="footer">MIT Licensed | Pterodactyl&reg; Copyright &copy; Dane Everitt and contributors</div>
+                <div class="footer">MIT Licensed | Chloridpanel | Copyright &copy; Chloridpanel contributors</div>
             </div>
         </div>
     </div>
