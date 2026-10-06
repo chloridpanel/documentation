@@ -8,31 +8,38 @@ on:
     branches:
       - master
 
+# Prevent concurrent deployments/builds from overlapping
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 24
-    
+          cache: 'yarn'
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
       - name: Build
-        run: yarn run build
+        run: yarn build
 
       - name: Deploy
-        if: github.ref == 'refs/heads/master'
-        uses: peaceiris/actions-gh-pages@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./.vuepress/dist
