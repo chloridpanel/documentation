@@ -8,19 +8,19 @@ on:
     branches:
       - master
 
-# Prevent concurrent deployments/builds from overlapping
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    name: Deploy
+  build:
+    name: Build Site
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,13 +34,24 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build
+      - name: Build VuePress site
         run: yarn build
 
-      - name: Deploy
+      - name: Upload Pages Artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        uses: peaceiris/actions-gh-pages@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./.vuepress/dist
-          cname: chlorid.org
+          path: ./.vuepress/dist
+
+  deploy:
+    name: Deploy to Pages
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
